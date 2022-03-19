@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Test</string>
+    <string name="strBtn1">버튼입니다~ 보이니?</string>
 </resources>
