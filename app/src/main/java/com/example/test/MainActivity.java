@@ -10,28 +10,28 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    RadioButton female;
-    RadioButton male;
+    Button button1;
+    Button button2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        female = (RadioButton) findViewById(R.id.female);
-        male = (RadioButton) findViewById(R.id.male);
+        button1 = (Button) findViewById(R.id.button1);
+        button2 = (Button) findViewById(R.id.button2);
 
-        female.setOnClickListener(new View.OnClickListener() {
+        button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "너는 여자구나!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "버튼 1이 눌렸습니다!", Toast.LENGTH_SHORT).show();
             }
         });
 
-        male.setOnClickListener(new View.OnClickListener() {
+        button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "너는 남자구나!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "버튼 2가 놀렸습니다!", Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -3,24 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="30dp"
     android:orientation="vertical">
 
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="버튼 1"
+        android:layout_marginBottom="30dp"
+        android:background="#088A4B"/>
     <TextView
-        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="성별 선택"/>
-
-    <RadioButton
-        android:id="@+id/female"
+        android:text="이건 텍스트뷰입니다."
+        android:layout_marginBottom="30dp"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="70px"
+        android:layout_marginBottom="30dp"
+        android:background="#0B0B61"/>
+    <Button
+        android:id="@+id/button2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="여성"/>
-
-    <RadioButton
-        android:id="@+id/male"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="남성"/>
+        android:layout_height="match_parent"
+        android:text="버튼 2"/>
 
 </LinearLayout>
