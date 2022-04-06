@@ -1,77 +1,92 @@
+
 package com.example.test;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.view.MotionEvent;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.CalendarView;
+import android.widget.Chronometer;
+import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.TimePicker;
 
 public class MainActivity extends AppCompatActivity {
+    Button btn_Start,btn_Stop;
+    Chronometer chronometer1;
+    RadioButton rdo_Cal, rdo_Time;
+    CalendarView calendarView;
+    TimePicker timePicker;
+    TextView txt_Year, txt_Month,txt_Hour,txt_Minute, txt_Date;
+    Integer cal_Year, cal_Month, cal_Date;
 
-    EditText edit1, edit2;
-    Button btnAdd, btnSub, btnMul, btnDiv;
-    TextView textResult;
-    String num1, num2;
-    Integer result;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle("초간단 계산기");
+        btn_Start = (Button) findViewById(R.id.btn_Start);
+        btn_Stop = (Button) findViewById(R.id.btn_Stop);
+        chronometer1 = (Chronometer) findViewById(R.id.chronometer1);
+        rdo_Cal = (RadioButton) findViewById(R.id.rdo_Cal);
+        rdo_Time = (RadioButton) findViewById(R.id.rdo_Time);
+        calendarView = (CalendarView) findViewById(R.id.calendarView);
+        timePicker = (TimePicker) findViewById(R.id.timePicker);
+        txt_Year = (TextView) findViewById(R.id.txt_Year);
+        txt_Month = (TextView) findViewById(R.id.txt_Month);
+        txt_Hour = (TextView) findViewById(R.id.txt_Hour);
+        txt_Date = (TextView)findViewById(R.id.txt_Date);
+        txt_Minute = (TextView) findViewById(R.id.txt_Minute);
 
-        edit1 = (EditText) findViewById(R.id.Edit1);
-        edit2 = (EditText) findViewById(R.id.Edit2);
+        timePicker.setVisibility(View.INVISIBLE);
+        calendarView.setVisibility(View.INVISIBLE);
 
-        btnAdd = (Button) findViewById(R.id.BtnAdd);
-        btnSub = (Button) findViewById(R.id.BtnSub);
-        btnMul = (Button) findViewById(R.id.BtnMul);
-        btnDiv = (Button) findViewById(R.id.BtnDiv);
-
-        textResult = (TextView) findViewById(R.id.TextResult);
-
-        btnAdd.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View arg0, MotionEvent arg1) {
-                num1 = edit1.getText().toString();
-                num2 = edit2.getText().toString();
-                result = Integer.parseInt(num1) + Integer.parseInt(num2);
-                textResult.setText("계산 결과 : " + result.toString());
-                return false;
+        rdo_Cal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calendarView.setVisibility(View.VISIBLE);
+                timePicker.setVisibility(View.INVISIBLE);
+            }
+        });
+        rdo_Time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calendarView.setVisibility(View.INVISIBLE);
+                timePicker.setVisibility(View.VISIBLE);
             }
         });
 
-        btnSub.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View arg0, MotionEvent arg1) {
-                num1 = edit1.getText().toString();
-                num2 = edit2.getText().toString();
-                result = Integer.parseInt(num1) - Integer.parseInt(num2);
-                textResult.setText("계산 결과 : " + result.toString());
-                return false;
+        btn_Start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chronometer1.setBase(SystemClock.elapsedRealtime());
+                chronometer1.start();
+            }
+        });
+        btn_Stop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chronometer1.stop();
+
+                txt_Year.setText(Integer.toString(cal_Year));
+                txt_Month.setText(Integer.toString(cal_Month));
+                txt_Date.setText(Integer.toString(cal_Date));
+                txt_Hour.setText(Integer.toString(timePicker.getCurrentHour()));
+                txt_Minute.setText(Integer.toString(timePicker.getCurrentMinute()));
             }
         });
 
-        btnMul.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View arg0, MotionEvent arg1) {
-                num1 = edit1.getText().toString();
-                num2 = edit2.getText().toString();
-                result = Integer.parseInt(num1) * Integer.parseInt(num2);
-                textResult.setText("계산 결과 : " + result.toString());
-                return false;
+
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int date) {
+                cal_Year=year;
+                cal_Month=month;
+                cal_Date=date;
             }
         });
-
-        btnDiv.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View arg0, MotionEvent arg1) {
-                num1 = edit1.getText().toString();
-                num2 = edit2.getText().toString();
-                result = Integer.parseInt(num1) / Integer.parseInt(num2);
-                textResult.setText("계산 결과 : " + result.toString());
-                return false;
-            }
-        });
-
     }
 }
